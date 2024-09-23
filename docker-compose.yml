@@ -1,0 +1,42 @@
+services:
+  
+  backend:
+    build: .
+    container_name: aichat_backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      - "SECRET_KEY=${SECRET_KEY}" # .env
+      - "DEBUG=${DEBUG}"
+      - "DATABASE_URL=postgres://postgres:postgres@db:5432/postgres"
+      - "SSL_REQUIRE=${SSL_REQUIRE}"
+  
+  frontend:
+    build: ./frontend
+    container_name: aichat_frontend
+    volumes:
+      - .:/frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_URL=http://localhost:8000
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:16.2
+    container_name: aichat_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+
+volumes:
+  postgres_data:
