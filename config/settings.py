@@ -49,7 +49,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(BASE_DIR.joinpath('frontend/build')),],
+        'DIRS': [str(BASE_DIR.joinpath('static')),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -108,8 +108,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [ str(BASE_DIR.joinpath('frontend', 'build', 'static')) ]
+STATICFILES_DIRS = [ str(BASE_DIR.joinpath('static', 'static')) ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
