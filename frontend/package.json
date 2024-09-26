@@ -16,7 +16,7 @@
     "build": "react-scripts build && npm run copy-build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "copy-build": "copyfiles -u 1 build/**/* ../static/"
+    "copy-build": "copyfiles -u 2 build/static/**/* ../static/ && copyfiles -u 1 build/* ../static/"
   },
   "devDependencies": {
     "copyfiles": "^2.4.1"
